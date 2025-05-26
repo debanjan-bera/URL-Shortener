@@ -7,7 +7,7 @@ const dirName = import.meta.dirname
 
 
 app.get("/url-shortener",(req,res)=>{
-  return res.sendFile(path.join(dirName,"public","shortener.html"))
+  return res.sendFile(path.join(dirName,"public","index.html"))
 })
 
 // app.get("/login", (req, res) => {
@@ -17,3 +17,10 @@ app.get("/url-shortener",(req,res)=>{
 //     }
 //   });
 // });
+
+
+const PORT = process.env.PORT;
+
+app.listen(PORT,()=>{
+    console.log(`Server is running at ${PORT}`);
+})
