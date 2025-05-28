@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
     <title>Document</title>
+
 </head>
+
 <body>
     <section>
         <h1>URL Shortner</h1>
-        <form action="/" method="post" id="shorten-form">
+        <form action="/" method="POST">
             <div>
                 <label for="url">Enter URL:</label>
                 <input type="url" name="url" id="url" required>
-                </div>
-                <div>
-<label for="shortCode">Enter URL:</label>
+            </div>
+            <div>
+                <label for="shortCode">Enter URL:</label>
                 <input type="text" name="shortCode" id="shortCode" required>
-            
-                </div>
-                <button type="submit">Submit</button>
+
+            </div>
+            <button type="submit">Submit</button>
 
         </form>
         <h2>Shortned URLS</h2>
-        <ul id="Shortned-urls">
-            
+        <ul id="shortned-urls">
+            {{shortned-urls}}
         </ul>
     </section>
-    <script>
+    <!-- <script>
         document.getElementById('shorten-form').addEventListener('submit', (e)=>{
             e.preventDefault();
             const formData = new FormData(e.target);
@@ -37,6 +41,7 @@
             
 
         })
-    </script>
+    </script> -->
 </body>
+
 </html>
