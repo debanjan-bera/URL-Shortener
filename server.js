@@ -1,10 +1,7 @@
 import express from "express";
-// import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import { mkdir, readFile, writeFile } from "fs/promises";
-import { existsSync } from "fs";
-
+import {readFile, writeFile } from "fs/promises";
 
 const app = express();
 
@@ -17,10 +14,6 @@ app.use(express.urlencoded({ extended: true }))
 
 const loadLinks = async () => {
   try {
-    if (!existsSync("data")) {
-      await mkdir("data", { recursive: true }); // Create directory if not exists
-    }
-
     const data = await readFile(DATA_FILE, "utf-8");
     return JSON.parse(data);
   } catch (err) {
@@ -101,75 +94,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
-
-
-
-// import { error } from "console";
-// import express from "express";
-// import { link, readFile, writeFile } from "fs";
-// import path from "path"
-// const app = express();
-
-// const dirName = import.meta.dirname
-// const DATA_FILE = path.join("data","links.json")
-
-// app.use(express.static("public"));
-
-
-
-// const loadlinks = async ()=>{
-//   try{
-//     const data = await readFile(DATA_FILE, "utf-8");
-//     return JSON.parse(data)
-
-//   }catch(err){
-//     if(err.conde === "ENOENT"){
-//       await readFile(DATA_FILE, JSON.stringify({}));
-//       return {};
-
-//     }
-//     throw error;
-//   }
-// }
-
-
-// const saveLinks = async(links) =>{
-//   await writeFile(DATA_FILE,JSON.stringify(links))
-// }
-
-
-// app.get("/", async(req,res)=>{
-//   try{
-//     const file = await fs.readFile(path.join("views",index.html));
-//     const links = await loadlinks();
-
-//     const content = file.toString().replaceAll(
-//       "",
-//       Object.entries(links)
-//       .map(([shortCode,url])=>{
-//         `<li><a href="/${shortCode}" target="_blank">${req.host}/${shortCode}</a> - ${url}</li>`
-//       }).join("")
-//     );
-//     return res.send(content);
-//   }catch(err){
-//     console.log(err);
-//     return res.status(500).send("Internal server error");
-//   }
-// })
-
-
-
-// // app.get("/login", (req, res) => {
-// //   res.sendFile(path.join(dirName, "public", "Login.html"), (err) => {
-// //     if (err) {
-// //       res.status(404).sendFile(path.join(dirName, "public", "Error.html"));
-// //     }
-// //   });
-// // });
-
-
-// const PORT = process.env.PORT;
-
-// app.listen(PORT,()=>{
-//     console.log(`Server is running at ${PORT}`);
-// })
