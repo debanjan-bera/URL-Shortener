@@ -80,6 +80,7 @@ app.post("/", async (req, res) => {
 app.get("/:shortCode", async (req, res) => {
   try {
     const { shortCode } = req.params;
+    console.log(shortCode);
     const links = await loadLinks();
     if (!links[shortCode]) return res.status(404).send("404 error");
     return res.redirect(links[shortCode]);
@@ -89,7 +90,7 @@ app.get("/:shortCode", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 000;
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
