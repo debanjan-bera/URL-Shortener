@@ -1,0 +1,247 @@
+/* -----------------------------
+   Tailwind base
+-------------------------------- */
+@import "tailwindcss";
+
+/* -----------------------------
+   Tailwind v4 Theme Tokens
+-------------------------------- */
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-dark-blue : hsl(var(--dark-blue));
+  --color-success : hsl(var(--success));
+  --color-card : hsl(var(--card));
+
+
+
+  /* Sidebar colors */
+  --color-sidebar-background: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+}
+
+/* -----------------------------
+   LIGHT THEME VARIABLES
+-------------------------------- */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    /* --foreground: 217 19% 27%; */
+    --foreground: 220 30% 10%;
+
+     --card: 0 0% 100%;
+    --card-foreground: 220 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 19% 27%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* --secondary: 217 33% 17%; */
+     --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 100%;
+
+        --dark-blue: 220 60% 15%;
+--success: 142 76% 36%;
+    /* --muted: 220 13% 95%;
+    --muted-foreground: 217 10% 50%; */
+ --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+
+
+  }
+
+  /* -----------------------------
+      DARK THEME
+  -------------------------------- */
+  .dark {
+    --background: 217 19% 27%;
+    --foreground: 0 0% 100%;
+
+    --card: 217 19% 27%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 217 19% 27%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* --secondary: 217 33% 17%; */
+        --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 217 10% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* -----------------------------
+   Base styles
+-------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: Inter, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium 
+           transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply border border-border bg-transparent text-foreground px-6 py-3 rounded-lg 
+           font-medium transition-all duration-300 hover:bg-secondary;
+  }
+
+  .section-padding {
+    @apply px-4 md:px-8 lg:px-16 py-16 md:py-24;
+  }
+}
+/* -----------------------------
+   Custom Utilities (v4 syntax)
+-------------------------------- */
+
+@utility bg-background {
+  background-color: var(--color-background);
+}
+
+@utility text-foreground {
+  color: var(--color-foreground);
+}
+
+@utility border-border {
+  border-color: var(--color-border);
+}
+
+@utility bg-card {
+  background-color: var(--card);
+}
+
+@utility text-primary-foreground {
+  color: var(--color-primary-foreground);
+}
+
+@utility bg-primary {
+  background-color: var(--color-primary);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(to right, var(--color-primary), hsl(217 91% 75%));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* -----------------------------
+   Animations
+-------------------------------- */
+@keyframes marquee {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-50%) }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+}
+
+@utility animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+@utility animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes accordion-down {
+  from { height: 0 }
+  to { height: var(--radix-accordion-content-height) }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to { height: 0 }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down .2s ease-out;
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up .2s ease-out;
+}
