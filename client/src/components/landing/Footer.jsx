@@ -11,9 +11,8 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">S</span>
-              </div>
+            <img src="logo.png" alt="" className="h-8 aspect-square" />
+            
               <span className="font-bold text-xl text-foreground">SHORTIE</span>
             </Link>
             <p className="text-sm text-muted-foreground">

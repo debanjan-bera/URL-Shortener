@@ -7,9 +7,9 @@ import { QrCode, Star, Check, Link2, Calendar } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="pt-24 pb-12 md:pt-32 md:pb-16 px-4 md:px-8 overflow-hidden">
+    <section className="pt-24 pb-12 md:pt-32 md:pb-16 px-3 md:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -31,7 +31,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-15"
+              className="text-3xl leading-10 sm:text-4xl md:text-5xl lg:text-6xl font-bold sm:leading-15"
             >
               BIO LINK & LINK SHORTENER{" "}
               <span className="inline-flex items-center gap-1">
@@ -90,18 +90,18 @@ const HeroSection = () => {
                     className="w-4 h-4 fill-yellow-400 text-yellow-400"
                   />
                 ))}
-                <span className="text-sm font-medium text-foreground ml-1">
-                  4.9
-                </span>
-              </div>
-              <span className="text-xs sm:text-sm text-muted-foreground">
+                <span className="text-sm sm:text-sm font-medium text-foreground ml-1">
+                  4.9{" "}
+              <span className="text-xs text-muted-foreground">
                 (from 3542 reviews)
               </span>
+                </span>
+              </div>
             </motion.div>
           </motion.div>
 
           {/* Right Content - QR Code & Preview */}
-          <div className="space-y-4">
+          <div className="space-y-4 w-full">
             <CustomCard className="p-6 bg-card border-border animate-float">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="font-semibold text-sm">QR CODE</h3>

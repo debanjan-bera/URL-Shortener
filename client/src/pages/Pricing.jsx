@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Info, ArrowRight } from "lucide-react";
+import { Check, Info, ArrowRight, IndianRupee } from "lucide-react";
 import CustomButton from '../components/ui/CustomButton';
 import { Footer } from '../components/landing/Footer';
 import { NavaBar } from '../components/landing/NavBar';
@@ -33,7 +33,7 @@ export default function Pricing() {
       price: { monthly: 18, yearly: 13 },
       yearlyPrice: 156,
       discount: "27% off",
-      billingNote: "Billed at $156 /yr",
+      billingNote: "Billed at 156 /yr",
       features: [
         { text: "5 active projects", icon: "📁" },
         { text: "75 MB upload limit", icon: "☁️" },
@@ -51,7 +51,7 @@ export default function Pricing() {
       price: { monthly: 42, yearly: 31 },
       yearlyPrice: 372,
       discount: "18% off",
-      billingNote: "Billed at $372 /yr",
+      billingNote: "Billed at 372 /yr",
       features: [
         { text: "Unlimited active projects", icon: "📁" },
         { text: "10 GB upload limit", icon: "☁️" },
@@ -119,7 +119,7 @@ export default function Pricing() {
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap">
+                  <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-purple-500 to-purple-600 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap">
                     Most Popular
                   </div>
                 )}
@@ -129,8 +129,8 @@ export default function Pricing() {
                   <p className="text-xs sm:text-sm text-muted-foreground mb-4">{plan.description}</p>
 
                   <div className="flex items-baseline gap-1 mb-2 flex-wrap">
-                    <span className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-                      ${billingPeriod === "yearly" ? plan.price.yearly : plan.price.monthly}
+                    <span className="text-3xl sm:text-4xl lg:text-5xl font-bold flex items-center gap-1">
+                      <IndianRupee />{billingPeriod === "yearly" ? plan.price.yearly : plan.price.monthly}
                     </span>
                     <span className="text-sm sm:text-base text-muted-foreground">/mo</span>
                     {plan.discount && billingPeriod === "yearly" && (

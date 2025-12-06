@@ -4,6 +4,8 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
+import Dashboard from "./components/dashboard";
+import CreateLink from "./components/dashboard/createlink";
 
 function App() {
   return (
@@ -15,6 +17,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-link" element={<CreateLink />} />
+
+
         </Routes>
       </BrowserRouter>
     </>
