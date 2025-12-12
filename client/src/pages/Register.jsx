@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form"
 import { Mail, Lock, Eye, EyeOff, User, ArrowLeft, Check } from "lucide-react";
 import { useState } from "react";
-
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const features = [
     "Unlimited short links",
@@ -12,6 +13,12 @@ export const Register = () => {
     "Advanced analytics",
     "QR code generation",
   ];
+  const { register, handleSubmit } = useForm()
+  const onSubmit = (data) => {
+    navigate("/dashboard");
+    console.log(data)
+  }
+
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -77,7 +84,7 @@ export const Register = () => {
             Get started with your free account today
           </p>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Full Name
@@ -86,6 +93,8 @@ export const Register = () => {
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="text"
+                  name="name"
+                  {...register("name")}
                   placeholder="Enter your full name"
                   className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   required
@@ -101,6 +110,8 @@ export const Register = () => {
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="email"
+                  // name="email"
+                  {...register("email")}
                   placeholder="Enter your email"
                   className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   required
@@ -116,6 +127,8 @@ export const Register = () => {
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type={showPassword ? "text" : "password"}
+                  // name="password"
+                  {...register("password")}
                   placeholder="Create a password"
                   className="w-full pl-12 pr-12 py-3 rounded-xl bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   required

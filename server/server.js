@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import connectDB from "./src/config/db.config.js";
 import shortUrl from "./src/routes/shortUrl.routes.js";
 import errorHandler from "./src/middleware/globalErroehandler.js";
+import authRouter from "./src/routes/auth.route.js";
 
 const app = express();
-dotenv.config("./.env");
+dotenv.config();
+
 const PORT = 4000;
 
 //Body Parser
@@ -17,6 +19,9 @@ app.use("/url/create", shortUrl);
 app.get("/", (req, res) => {
   res.send(`<h2>Hello Users</>`);
 });
+
+app.use("/api/auth",authRouter)
+
 
 app.use(errorHandler);
 

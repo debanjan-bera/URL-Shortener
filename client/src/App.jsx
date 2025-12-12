@@ -4,8 +4,11 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
-import Dashboard from "./components/dashboard";
+// import Dashboard from "./components/dashboard";
 import CreateLink from "./components/dashboard/createlink";
+import Dashboard from "./pages/dashboard";
+import DashboardLayout from "./components/dashboard";
+import MyLinks from "./pages/url-shortener/MyLinks";
 
 function App() {
   return (
@@ -17,10 +20,12 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create-link" element={<CreateLink />} />
-
-
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<DashboardLayout />} />
+            <Route path="create-link" element={<CreateLink />} />
+            <Route path="manage-link" element={<MyLinks />} />
+            
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

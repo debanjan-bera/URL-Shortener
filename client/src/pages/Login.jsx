@@ -1,12 +1,18 @@
 // import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    // run login logic here...
+    navigate("/dashboard");
+  };
   return (
     <div className="min-h-screen bg-background flex">
       {/* Left Side - Form */}
@@ -39,7 +45,7 @@ export const Login = () => {
             Enter your credentials to access your account
           </p>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Email
@@ -107,9 +113,11 @@ export const Login = () => {
               </a>
             </div>
 
-            <button type="submit" className="btn-primary w-full">
+            <button type="submit"  className="btn-primary w-full">
               Sign In
             </button>
+
+            
           </form>
 
           <p className="text-center text-muted-foreground mt-8">
@@ -124,7 +132,7 @@ export const Login = () => {
         </motion.div>
       </div>
 
-      {/* Right Side - Decoration */}
+      {/* Right Side */}
       <div className="hidden lg:flex flex-1 bg-primary items-center justify-center p-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

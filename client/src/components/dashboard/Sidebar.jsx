@@ -12,7 +12,7 @@ export default function Sidebar() {
   };
   const navItems = [
     { label: "Dashboard", icon: Home, href: "/dashboard", active: true },
-    { label: "Create Link", icon: Plus, href: "/create-link" },
+    { label: "Create Link", icon: Plus, href: "/dashboard/create-link" },
     // { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
     // { label: "Manage QR", icon: List, href: "/manage-qr" },
     // { label: "Settings", icon: Settings, href: "/settings" },
@@ -21,7 +21,7 @@ export default function Sidebar() {
     <>
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-card border border-border rounded-lg"
+        className="lg:hidden  absolute top-4 right-4 z-50 p-2 bg-card border border-border rounded-lg"
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
@@ -32,7 +32,9 @@ export default function Sidebar() {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
-        <div className="p-6">
+        <div className="p-6 flex items-center gap-1.5">
+          <img src="logo.png" alt="" className="h-10 aspect-square" />
+
           <h1 className="text-2xl font-bold text-primary">SHORTIE</h1>
         </div>
         <nav className="px-4 space-y-2">

@@ -3,6 +3,10 @@ import { createShortUrl, redirectMainUrl } from "../controllers/shortUrl.control
 
 const router = express.Router();
 
+router.get("/", (req,res)=>{
+    res.send(`<h2> create Data</h2>`)
+
+});
 router.post("/", createShortUrl);
 
 router.post("/:id",redirectMainUrl);
