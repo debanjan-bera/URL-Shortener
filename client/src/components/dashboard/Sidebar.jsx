@@ -1,9 +1,11 @@
-import { Home, LogOut, Menu, Plus, X } from "lucide-react";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Home, LogOut, Menu, Plus, X,Link2} from "lucide-react";
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+  console.log(location.pathname);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,8 +13,10 @@ export default function Sidebar() {
     navigate("/login");
   };
   const navItems = [
-    { label: "Dashboard", icon: Home, href: "/dashboard", active: true },
-    { label: "Create Link", icon: Plus, href: "/dashboard/create-link" },
+    { label: "Dashboard", icon: Home, href: "/dashboard" },
+    { label: "Create Link", icon: Plus, href: "/create-link" },
+    { label: "My Link", icon: Link2, href: "/my-link" },
+
     // { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
     // { label: "Manage QR", icon: List, href: "/manage-qr" },
     // { label: "Settings", icon: Settings, href: "/settings" },
@@ -43,13 +47,15 @@ export default function Sidebar() {
               key={item.label}
               to={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                item.active
+                location.pathname === item.href
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-accent/10 hover:text-foreground"
               }`}
             >
               <item.icon size={20} />
-              <span>{item.label}</span>
+              <span>
+        {item.label}
+              </span>
             </Link>
           ))}
         </nav>

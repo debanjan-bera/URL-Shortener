@@ -20,11 +20,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<DashboardLayout />} />
-            <Route path="create-link" element={<CreateLink />} />
-            <Route path="manage-link" element={<MyLinks />} />
-            
+          <Route element={<Dashboard />}>
+            <Route path="/dashboard" element={<DashboardLayout />} />
+            <Route path="/create-link" element={<CreateLink />} />
+            <Route path="/my-link" element={<MyLinks />} />
           </Route>
         </Routes>
       </BrowserRouter>
