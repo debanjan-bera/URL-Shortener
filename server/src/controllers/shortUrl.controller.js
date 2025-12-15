@@ -17,7 +17,7 @@ export const createShortUrl = async (req, res) => {
 
 export const redirectMainUrl = async (req, res) => {
   const { id } = req.params;
-  const url = await getShortUrl(id) // returns full objects!!!
+  const url = await getShortUrl(id)
   if (url) res.redirect(url.full_url);
-  else res.status(404).send("Not Found");
+  return res.status(404).send("Not Found");
 }

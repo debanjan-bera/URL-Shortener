@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Link2, Copy, Check, Sparkles } from "lucide-react";
-import CustomButton from "../ui/CustomButton.jsx";
+import CustomButton from "../../components/ui/CustomButton.jsx";
 
 const CreateLink = () => {
   const [longUrl, setLongUrl] = useState("");

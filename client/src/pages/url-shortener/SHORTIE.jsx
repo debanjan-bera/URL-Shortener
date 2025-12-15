@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/dashboard/Sidebar";
+import Sidebar from "../../components/dashboard/Sidebar";
 
-const Dashboard = () => {
+const SHORTIE = () => {
   return (
     <div className="min-h-screen bg-background flex">
       <Sidebar />
@@ -12,4 +12,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SHORTIE;

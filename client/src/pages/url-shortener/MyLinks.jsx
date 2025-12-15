@@ -14,11 +14,11 @@ import {
   MoreVertical,
   X,
   Check,
-  MousePointerClick,
-  LinkIcon,
   ArrowUpRight,
 } from "lucide-react";
 import CustomButton from "../../components/ui/CustomButton";
+import DashboardKPI from "../../components/dashboard/KPI";
+import MyLinksList from "../../components/LinkList";
 
 const MyLinks = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,7 +34,7 @@ const MyLinks = () => {
     {
       id: "1",
       name: "Company Website",
-      shortUrl: "link.app/abc123",
+      shortUrl: "localhost:4000/abc123",
       originalUrl: "https://example.com/very-long-url-path",
       clicks: 1234,
       created: "Dec 1, 2024",
@@ -42,7 +42,7 @@ const MyLinks = () => {
     {
       id: "2",
       name: "Product Launch",
-      shortUrl: "link.app/prod01",
+      shortUrl: "localhost:4000/prod01",
       originalUrl: "https://example.com/products/new-launch-2024",
       clicks: 567,
       created: "Nov 28, 2024",
@@ -50,7 +50,7 @@ const MyLinks = () => {
     {
       id: "3",
       name: "Blog Post",
-      shortUrl: "link.app/blog99",
+      shortUrl: "localhost:4000/blog99",
       originalUrl: "https://example.com/blog/amazing-article",
       clicks: 234,
       created: "Nov 25, 2024",
@@ -58,7 +58,7 @@ const MyLinks = () => {
     {
       id: "4",
       name: "Event Registration",
-      shortUrl: "link.app/event1",
+      shortUrl: "localhost:4000/event1",
       originalUrl: "https://example.com/events/registration",
       clicks: 890,
       created: "Nov 20, 2024",
@@ -66,7 +66,7 @@ const MyLinks = () => {
     {
       id: "5",
       name: "Newsletter Signup",
-      shortUrl: "link.app/news22",
+      shortUrl: "localhost:4000/news22",
       originalUrl: "https://example.com/newsletter",
       clicks: 456,
       created: "Nov 15, 2024",
@@ -74,14 +74,14 @@ const MyLinks = () => {
     {
       id: "6",
       name: "Social Campaign",
-      shortUrl: "link.app/social",
+      shortUrl: "localhost:4000/social",
       originalUrl: "https://example.com/campaign/social-media",
       clicks: 321,
       created: "Nov 10, 2024",
     },
   ]);
 
-  const totalLinks = links.length;
+
   const totalClicks = links.reduce((sum, link) => sum + link.clicks, 0);
 
   const filteredLinks = links.filter(
@@ -146,9 +146,14 @@ const MyLinks = () => {
               </Link>
             </div>
           </motion.div>
+          <DashboardKPI
+            grid={2}
+            totalClicks={totalClicks}
+            totalLinks={links.length}
+          />
 
           {/* KPIs */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
@@ -184,7 +189,7 @@ const MyLinks = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Controls */}
           <motion.div
@@ -235,7 +240,12 @@ const MyLinks = () => {
               </div>
             </div>
           </motion.div>
-
+          <MyLinksList
+            filteredLinks={filteredLinks}
+            startEdit={startEdit}
+            copyToClipboard={copyToClipboard}
+            setDeleteConfirm={setDeleteConfirm}
+          />
           {/* Links Grid/List */}
           <AnimatePresence mode="wait">
             {viewMode === "grid" ? (

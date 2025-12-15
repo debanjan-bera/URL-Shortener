@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {BarChart3,Link2,QrCode,MousePointerClick,Globe,Plus,ExternalLink,Copy,List} from "lucide-react";
-import CustomButton from "../ui/CustomButton";
-
-const DashboardLayout = () => {
+import {BarChart3,QrCode,Plus,ExternalLink,Copy,List} from "lucide-react";
+// import CustomButton from "../ui/CustomButton";
+import CustomButton from "../../components/ui/CustomButton"
+import DashboardKPI from "../../components/dashboard/KPI";
+const Dashboard = () => {
   const [copiedId, setCopiedId] = useState(null);
 
   const recentLinks = [
@@ -38,22 +39,7 @@ const DashboardLayout = () => {
     },
   ];
   const totalClicks = recentLinks.reduce((sum, item) => sum + item.clicks, 0);
-  const stats = [
-    {
-      label: "Total Links",
-      value: recentLinks.length,
-      icon: Link2,
-      change: "+12%",
-    },
-    {
-      label: "Total Clicks",
-      value: totalClicks,
-      icon: MousePointerClick,
-      change: "+8%",
-    },
-    { label: "QR Codes", value: "0", icon: QrCode, change: "+15%" },
-    { label: "Countries", value: "0", icon: Globe, change: "+3%" },
-  ];
+ 
 
   const chartData = [65, 40, 80, 55, 90, 70, 85];
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -82,29 +68,7 @@ const DashboardLayout = () => {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-card border border-border rounded-xl p-6"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-2 bg-primary/10 rounded-lg`}>
-                  <stat.icon className={`w-5 h-5  text-primary`} />
-                </div>
-                {/* <span className="text-sm text-green-500 font-medium flex items-center gap-1">
-                    <TrendingUp size={14} />
-                    {stat.change}
-                  </span> */}
-              </div>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
+        <DashboardKPI grid={4} totalClicks={totalClicks} totalLinks={recentLinks.length}/>
 
         {/* Recent Links */}
         <motion.div
@@ -281,4 +245,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default Dashboard;
