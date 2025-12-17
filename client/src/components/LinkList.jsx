@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Copy, Edit2, Trash2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  Copy,
+  Edit2,
+  ExternalLink,
+  MoreVertical,
+  Trash2,
+} from "lucide-react";
 
-const MyLinksList = ({
-  filteredLinks,
-
-
-  copyToClipboard,
-
-  setDeleteConfirm,
-}) => {
+const MyLinksList = ({ filteredLinks }) => {
+  const copyToClipboard = (url) => {
+    navigator.clipboard.writeText(`https://${url}`);
+  };
   return (
     <>
       <motion.div
@@ -76,14 +79,14 @@ const MyLinksList = ({
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-primary font-medium text-sm">
+                  <span className="text-primary font-medium text-sm flex items-center gap-1">
                     {link.shortUrl}
+                    <ExternalLink size={12} />
                   </span>
                 </td>
                 <td className="px-4 py-3 hidden md:table-cell">
-                  <span className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-sm">
+                  <span className="text-muted-foreground hover:text-foreground  text-sm">
                     {link.originalUrl.slice(0, 28)}...
-                    {/* <ExternalLink size={12} /> */}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-foreground">
@@ -103,24 +106,25 @@ const MyLinksList = ({
                     >
                       <ArrowUpRight size={16} className="text-primary" />
                     </a>
-                    {/* <button
-                      onClick={() => startEdit(link)}
+                    <MoreVertical size={16} />
+                    <button
+                      // onClick={() => startEdit(link)}
                       className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
                     >
                       <Edit2 size={16} className="text-muted-foreground" />
-                    </button> */}
-                    {/* <button
+                    </button>
+                    <button
                       onClick={() => copyToClipboard(link.shortUrl)}
                       className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
                     >
                       <Copy size={16} className="text-muted-foreground" />
                     </button>
                     <button
-                      onClick={() => setDeleteConfirm(link.id)}
+                      // onClick={() => setDeleteConfirm(link.id)}
                       className="p-2 hover:bg-red-500/10 rounded-lg transition-colors"
                     >
                       <Trash2 size={16} className="text-red-500" />
-                    </button> */}
+                    </button>
                   </div>
                 </td>
               </tr>

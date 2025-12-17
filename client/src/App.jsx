@@ -9,6 +9,7 @@ import CreateLink from "./pages/url-shortener/createlink";
 import MyLinks from "./pages/url-shortener/MyLinks";
 import SHORTIE from "./pages/url-shortener/SHORTIE";
 import Dashboard from "./pages/url-shortener/dashboard";
+import RecentLinks from "./pages/url-shortener/RecentLinks";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/my-link" element={<MyLinks />} />
+            <Route path="/recent-link" element={<RecentLinks />} />
+
           </Route>
         </Routes>
       </BrowserRouter>
