@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, LogOut, Menu, Plus, X,Link2} from "lucide-react";
+import { Home, LogOut, Menu, X,Link2, QrCode} from "lucide-react";
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,18 +14,14 @@ export default function Sidebar() {
   };
   const navItems = [
     { label: "Dashboard", icon: Home, href: "/dashboard" },
-    { label: "Create Link", icon: Plus, href: "/create-link" },
     { label: "My Link", icon: Link2, href: "/my-link" },
-
-    // { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
-    // { label: "Manage QR", icon: List, href: "/manage-qr" },
-    // { label: "Settings", icon: Settings, href: "/settings" },
+    { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
   ];
   return (
     <>
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden  absolute top-4 right-4 z-50 p-2 bg-card border border-border rounded-lg"
+        className="lg:hidden  absolute top-4 right-4 z-30 p-2 bg-card border border-border rounded-lg"
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>

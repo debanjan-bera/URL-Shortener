@@ -8,8 +8,9 @@ import Pricing from "./pages/Pricing";
 import CreateLink from "./pages/url-shortener/createlink";
 import MyLinks from "./pages/url-shortener/MyLinks";
 import SHORTIE from "./pages/url-shortener/SHORTIE";
-import Dashboard from "./pages/url-shortener/dashboard";
 import RecentLinks from "./pages/url-shortener/RecentLinks";
+import QRGenerator from "./pages/url-shortener/QRGenerator";
+import Dashboard from "./pages/url-shortener/Dashboard";
 
 function App() {
   return (
@@ -19,15 +20,16 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route element={<SHORTIE />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/my-link" element={<MyLinks />} />
             <Route path="/recent-link" element={<RecentLinks />} />
+            <Route path="/qr-generator" element={<QRGenerator />} />
 
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -7,8 +7,12 @@ import {
   MoreVertical,
   Trash2,
 } from "lucide-react";
+import ItemBox from "./ItemBox";
+import { useState } from "react";
 
 const MyLinksList = ({ filteredLinks }) => {
+  const [selectedLink, setSelectedLink] = useState(null);
+
   const copyToClipboard = (url) => {
     navigator.clipboard.writeText(`https://${url}`);
   };
@@ -19,9 +23,12 @@ const MyLinksList = ({ filteredLinks }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="bg-card w-full border border-border rounded-xl overflow-x-scroll"
+        className="bg-card w-full border border-border rounded-xl overflow-hidden "
       >
-        <table className="w-full overflow-x-scroll">
+        <div className="overflow-x-auto">
+
+        </div>
+        <table className="w-full overflow-x-auto">
           <thead className="bg-muted/30">
             <tr>
               <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
@@ -36,7 +43,10 @@ const MyLinksList = ({ filteredLinks }) => {
               <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground">
                 Clicks
               </th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
+              <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
+                QR Code
+              </th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hidden lg:table-cell">
                 Created
               </th>
               <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground ">
@@ -92,7 +102,14 @@ const MyLinksList = ({ filteredLinks }) => {
                 <td className="px-4 py-3 text-foreground">
                   {link.clicks.toLocaleString()}
                 </td>
-                <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">
+                <td className="px-4 py-3 text-foreground  justify-center hidden md:table-cell">
+                  <img
+                    src={`${link?.qrcode || "logo.png"}`}
+                    alt=""
+                    className="h-10 aspect-square rounded-sm"
+                  />
+                </td>
+                <td className="px-4 py-3 text-muted-foreground hidden lg:table-cell">
                   {link.created}
                 </td>
                 <td className="px-4 py-3">
@@ -106,22 +123,38 @@ const MyLinksList = ({ filteredLinks }) => {
                     >
                       <ArrowUpRight size={16} className="text-primary" />
                     </a>
-                    <MoreVertical size={16} />
+                    <div className="relative">
+                      <button
+                        className="p-2 rounded-2xl hover:bg-neutral-300/30 transition-colors "
+                        onClick={() =>
+                          setSelectedLink(
+                            selectedLink === link.id ? null : link.id
+                          )
+                        }
+                      >
+                        <MoreVertical size={16} className="relative" />
+                      </button>
+                        {selectedLink === link.id && (
+                          <ItemBox link={filteredLinks} />
+                        )}
+
+                    </div>
+
                     <button
                       // onClick={() => startEdit(link)}
-                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
+                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors hidden"
                     >
                       <Edit2 size={16} className="text-muted-foreground" />
                     </button>
                     <button
                       onClick={() => copyToClipboard(link.shortUrl)}
-                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
+                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors hidden"
                     >
                       <Copy size={16} className="text-muted-foreground" />
                     </button>
                     <button
                       // onClick={() => setDeleteConfirm(link.id)}
-                      className="p-2 hover:bg-red-500/10 rounded-lg transition-colors"
+                      className="p-2 hover:bg-red-500/10 rounded-lg transition-colors hidden"
                     >
                       <Trash2 size={16} className="text-red-500" />
                     </button>
