@@ -4,16 +4,9 @@ import CreateLink from "./createlink";
 import { useState } from "react";
 
 const SHORTIE = () => {
-  const [openForm, isOpenForm] = useState(true);
+  const [openForm, isOpenForm] = useState(false);
   return (
     <>
-      {/* <div className="min-h-screen bg-background flex">
-        <Sidebar />
-      <div className="fixed flex-1  top-0 left-0  z-50 bg-white w-full h-full">hello</div>
-        <div className="flex-1">
-          <Outlet />
-        </div>
-      </div> */}
       <div
         className={` bg-background flex ${
           openForm ? "h-screen overflow-hidden" : "min-h-screen"

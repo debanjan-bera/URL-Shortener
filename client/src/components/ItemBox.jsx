@@ -1,13 +1,31 @@
 import { Copy, Edit2, Trash2 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-function ItemBox({link}) {
-  const copyToClipboard = (url) => {
-    navigator.clipboard.writeText(`https://${url}`);
+function ItemBox({ link }) {
+  const [copiedId, setCopiedId] = useState(null);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`https://${link.shortUrl}`);
+    setCopiedId(link.id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
+  //   const copyToClipboard = (text, id) => {
+  //   navigator.clipboard.writeText(text);
+
+  //
+  //right-0 mt-1right: 1rem;
+  // top: -7rem;
+  // };
   return (
     <>
-      <div className="absolute right-0 mt-1 bg-card border border-border rounded-lg shadow-lg py-1 min-w-[120px] z-10">
+      <motion.div
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        className="absolute right-0 top-full mt-2 w-40 bg-card border border-border rounded-lg shadow-lg z-50"
+
+        // className="absolute right-4 -top-30 mt-1 bg-card border border-border rounded-lg shadow-lg py-1 min-w-[120px] z-10"
+      >
         <button
           // onClick={() => startEdit(link)}
           className="w-full px-3 py-2 text-left text-sm hover:bg-accent/10 flex items-center gap-2"
@@ -15,8 +33,11 @@ function ItemBox({link}) {
           <Edit2 size={14} /> Edit
         </button>
         <button
-          onClick={() => copyToClipboard(link.shortUrl)}
-          className="w-full px-3 py-2 text-left text-sm hover:bg-accent/10 flex items-center gap-2"
+          onClick={() => copyToClipboard()}
+          className={`w-full px-3 py-2 text-left text-sm hover:bg-accent/10 flex items-center gap-2
+                           ${copiedId === link.id ? "text-green-500" : ""}
+                          `}
+          // className=""
         >
           <Copy size={14} /> Copy
         </button>
@@ -26,7 +47,7 @@ function ItemBox({link}) {
         >
           <Trash2 size={14} /> Delete
         </button>
-      </div>
+      </motion.div>
     </>
   );
 }

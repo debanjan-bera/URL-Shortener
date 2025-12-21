@@ -1,21 +1,10 @@
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { memo, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  Copy,
-  Edit2,
-  ExternalLink,
-  MoreVertical,
-  Trash2,
-} from "lucide-react";
-import ItemBox from "./ItemBox";
-import { useState } from "react";
+import Dropdown from "./DropDown";
 
-const MyLinksList = ({ filteredLinks }) => {
-  const [selectedLink, setSelectedLink] = useState(null);
-
-  const copyToClipboard = (url) => {
-    navigator.clipboard.writeText(`https://${url}`);
-  };
+const MyLinksList = ({ filteredLinks, isDashboard }) => {
+  const [openId, setOpenId] = useState(null);
   return (
     <>
       <motion.div
@@ -23,15 +12,19 @@ const MyLinksList = ({ filteredLinks }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="bg-card w-full border border-border rounded-xl overflow-hidden "
+        className={`bg-card w-full ${
+          !isDashboard && "border border-border rounded-xl"
+        } `}
       >
-        <div className="overflow-x-auto">
-
-        </div>
-        <table className="w-full overflow-x-auto">
+        <div className=""></div>
+        <table className="w-full ">
           <thead className="bg-muted/30">
             <tr>
-              <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
+              <th
+                className={`text-left px-4 py-3 text-sm font-medium text-muted-foreground ${
+                  isDashboard ? "hidden" : "hidden sm:table-cell"
+                } `}
+              >
                 Name
               </th>
               <th className="text-left px-4 py-3 text-sm font-medium text-muted-foreground">
@@ -57,38 +50,17 @@ const MyLinksList = ({ filteredLinks }) => {
           <tbody className="divide-y divide-border">
             {filteredLinks.map((link) => (
               <tr key={link.id} className="hover:bg-muted/10 transition-colors">
-                <td className="px-4 py-3 hidden sm:table-cell">
-                  {/* {editingId === link.id ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={editName}
-                        onChange={(e) => setEditName(e.target.value)}
-                        className="h-8 text-sm w-32"
-                      />
-                      <button
-                        onClick={() => handleEdit(link.id, editName)}
-                        className="text-green-500"
-                      >
-
-                      </button>
-                      <button
-                        onClick={() => setEditingId(null)}
-                        className="text-muted-foreground"
-                      >
-                        <X size={16} />
-                      </button>
-                    </div>
-                  ) : (
-                    <span className="font-medium text-foreground">
-                      {link.name}
-                    </span>
-                  )} */}
+                <td
+                  className={`px-4 py-3 ${
+                    isDashboard ? "hidden" : "hidden sm:table-cell"
+                  } `}
+                >
                   <span className="font-medium text-foreground">
                     {link.name}
                   </span>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 relative">
+                  {/* <div className="flex items-center gap-1 relative"> */}
                   <span className="text-primary font-medium text-sm flex items-center gap-1">
                     {link.shortUrl}
                     <ExternalLink size={12} />
@@ -112,7 +84,7 @@ const MyLinksList = ({ filteredLinks }) => {
                 <td className="px-4 py-3 text-muted-foreground hidden lg:table-cell">
                   {link.created}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 relative">
                   <div className="flex items-center gap-1">
                     <a
                       href={`https://${link.shortUrl}`}
@@ -123,41 +95,16 @@ const MyLinksList = ({ filteredLinks }) => {
                     >
                       <ArrowUpRight size={16} className="text-primary" />
                     </a>
-                    <div className="relative">
-                      <button
-                        className="p-2 rounded-2xl hover:bg-neutral-300/30 transition-colors "
-                        onClick={() =>
-                          setSelectedLink(
-                            selectedLink === link.id ? null : link.id
-                          )
+                    <div className="flex items-center gap-1 relative">
+                      <Dropdown
+                        isOpen={openId === link.id}
+                        link={link}
+                        onToggle={() =>
+                          setOpenId(openId === link.id ? null : link.id)
                         }
-                      >
-                        <MoreVertical size={16} className="relative" />
-                      </button>
-                        {selectedLink === link.id && (
-                          <ItemBox link={filteredLinks} />
-                        )}
-
+                        onClose={() => setOpenId(null)}
+                      />
                     </div>
-
-                    <button
-                      // onClick={() => startEdit(link)}
-                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors hidden"
-                    >
-                      <Edit2 size={16} className="text-muted-foreground" />
-                    </button>
-                    <button
-                      onClick={() => copyToClipboard(link.shortUrl)}
-                      className="p-2 hover:bg-accent/10 rounded-lg transition-colors hidden"
-                    >
-                      <Copy size={16} className="text-muted-foreground" />
-                    </button>
-                    <button
-                      // onClick={() => setDeleteConfirm(link.id)}
-                      className="p-2 hover:bg-red-500/10 rounded-lg transition-colors hidden"
-                    >
-                      <Trash2 size={16} className="text-red-500" />
-                    </button>
                   </div>
                 </td>
               </tr>
@@ -169,4 +116,4 @@ const MyLinksList = ({ filteredLinks }) => {
   );
 };
 
-export default MyLinksList;
+export default memo(MyLinksList);

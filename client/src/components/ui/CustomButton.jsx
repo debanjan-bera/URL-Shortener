@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { memo } from "react";
 // import { motion } from "motion/react"
 const CustomButton = ({
   children,
@@ -16,6 +17,7 @@ const CustomButton = ({
     default: "bg-primary text-primary-foreground hover:bg-primary/90",
     outline: "border border-border bg-transparent hover:bg-accent/10 text-foreground",
     ghost: "hover:bg-accent/10 text-foreground",
+    green:"bg-green-500/70 text-green-950 hover:bg-green-500/80"
   };
 
   const sizes = {
@@ -31,7 +33,7 @@ const CustomButton = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${className} ${baseStyles} ${variants[variant]} ${sizes[size]} `}
     >
       {children}
       
@@ -39,4 +41,4 @@ const CustomButton = ({
   );
 };
 
-export default CustomButton;
+export default memo(CustomButton);

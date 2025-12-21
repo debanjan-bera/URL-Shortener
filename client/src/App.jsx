@@ -4,13 +4,12 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
-// import Dashboard from "./components/dashboard";
 import CreateLink from "./pages/url-shortener/createlink";
-import MyLinks from "./pages/url-shortener/MyLinks";
 import SHORTIE from "./pages/url-shortener/SHORTIE";
-import RecentLinks from "./pages/url-shortener/RecentLinks";
 import QRGenerator from "./pages/url-shortener/QRGenerator";
 import Dashboard from "./pages/url-shortener/Dashboard";
+import Dropdown from "./components/DropDown";
+import MyLinks from "./pages/url-shortener/MyLinks";
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/my-link" element={<MyLinks />} />
-            <Route path="/recent-link" element={<RecentLinks />} />
             <Route path="/qr-generator" element={<QRGenerator />} />
 
           </Route>
