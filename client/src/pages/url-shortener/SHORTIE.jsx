@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/dashboard/Sidebar";
 import CreateLink from "./createlink";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 const SHORTIE = () => {
   const [openForm, isOpenForm] = useState(false);
@@ -32,4 +32,4 @@ const SHORTIE = () => {
   );
 };
 
-export default SHORTIE;
+export default memo(SHORTIE);

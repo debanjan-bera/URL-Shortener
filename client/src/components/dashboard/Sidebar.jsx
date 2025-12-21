@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, LogOut, Menu, X,Link2, QrCode} from "lucide-react";
+import { Home, LogOut, Menu, X,Link2, QrCode, Settings} from "lucide-react";
 
-export default function Sidebar() {
+function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  console.log(location.pathname);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // logout();
+  const handleLogout = useCallback(() => {
     navigate("/login");
-  };
-  const navItems = [
+  },[navigate]);
+
+  const navItems = useMemo(()=>[
     { label: "Dashboard", icon: Home, href: "/dashboard" },
     { label: "My Link", icon: Link2, href: "/my-link" },
     { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
-  ];
+    { label: "Settings", icon: Settings, href: "/settings" },
+  ],[]);
+
+  
   return (
     <>
       <button
@@ -78,3 +80,5 @@ export default function Sidebar() {
     </>
   );
 }
+
+export default memo(Sidebar);

@@ -1,22 +1,28 @@
 import { Globe, Link2, MousePointerClick, QrCode } from "lucide-react";
 import { motion } from "framer-motion";
+import { memo, useMemo } from "react";
 
 const DashboardKPI = ({ grid, totalClicks, totalLinks }) => {
-  const stats = [
-    { label: "Total Links", value: totalLinks, icon: Link2, change: "+12%" },
-    {
-      label: "Total Clicks",
-      value: totalClicks,
-      icon: MousePointerClick,
-      change: "+8%",
-    },
-    { label: "QR Codes", value: "0", icon: QrCode, change: "+15%" },
-    { label: "Countries", value: "0", icon: Globe, change: "+3%" },
-  ];
-  const filteredStats =
-    grid === 2
+  const stats = useMemo(
+    () => [
+      { label: "Total Links", value: totalLinks, icon: Link2, change: "+12%" },
+      {
+        label: "Total Clicks",
+        value: totalClicks,
+        icon: MousePointerClick,
+        change: "+8%",
+      },
+      { label: "QR Codes", value: "0", icon: QrCode, change: "+15%" },
+      { label: "Countries", value: "0", icon: Globe, change: "+3%" },
+    ],
+    [totalClicks, totalLinks]
+  );
+
+  const filteredStats = useMemo(() => {
+    return grid === 2
       ? stats.filter((item) => !["QR Codes", "Countries"].includes(item.label))
       : stats;
+  }, [grid, stats]);
 
   return (
     <>
@@ -49,4 +55,4 @@ const DashboardKPI = ({ grid, totalClicks, totalLinks }) => {
   );
 };
 
-export default DashboardKPI;
+export default memo(DashboardKPI);

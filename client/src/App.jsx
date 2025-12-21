@@ -8,8 +8,8 @@ import CreateLink from "./pages/url-shortener/createlink";
 import SHORTIE from "./pages/url-shortener/SHORTIE";
 import QRGenerator from "./pages/url-shortener/QRGenerator";
 import Dashboard from "./pages/url-shortener/Dashboard";
-import Dropdown from "./components/DropDown";
 import MyLinks from "./pages/url-shortener/MyLinks";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -20,12 +20,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/settings" element={<Settings />} />
           <Route element={<SHORTIE />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/my-link" element={<MyLinks />} />
-            <Route path="/qr-generator" element={<QRGenerator />} />
 
+            <Route path="/qr-generator" element={<QRGenerator />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
