@@ -6,26 +6,30 @@ import DashboardKPI from "../../components/dashboard/KPI";
 import MyLinksList from "../../components/LinkList";
 import BoxQRList from "../../components/BoxQRList";
 import SearchBar from "../../components/serachBar";
+import { useDispatch, useSelector } from "react-redux";
+import CustomButton from "../../components/ui/CustomButton";
+import { toggleAddTaskForm } from "../../components/features/UI/uiReducers";
 
 const MyLinks = () => {
   const searchRef = useRef(null);
   const [viewMode, setViewMode] = useState("grid");
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  // const links = useMemo(
+  //   () => [
+  //     {
+  //       id: "1",
+  //       name: "Company Website",
+  //       shortUrl: "localhost:4000/abc123",
+  //       originalUrl: "https://example.com",
+  //       clicks: 1234,
+  //       created: "Dec 1, 2024",
+  //     },
+  //   ],
+  //   []
+  // );
 
-  const links = useMemo(
-    () => [
-      {
-        id: "1",
-        name: "Company Website",
-        shortUrl: "localhost:4000/abc123",
-        originalUrl: "https://example.com",
-        clicks: 1234,
-        created: "Dec 1, 2024",
-      },
-    ],
-    []
-  );
-
+  const links = useSelector((state )=> state.url.shortUrl)
   const totalClicks = useMemo(
     () => links.reduce((sum, link) => sum + link.clicks, 0),
     [links]
@@ -43,9 +47,29 @@ const MyLinks = () => {
 
   return (
     <>
-      <motion.div className="mb-8">
-        <h1 className="text-3xl font-bold">My Links</h1>
-        <p className="text-muted-foreground">Manage your links</p>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+              My Links
+            </h1>
+            <p className="text-muted-foreground mt-1">
+              View, edit, and organize your shortened links.
+            </p>
+          </div>
+          {/* <Link to="/create-link"> */}
+            <CustomButton className="gap-2" 
+            onClick={()=> dispatch(toggleAddTaskForm())}
+            >
+              <Link2 size={18} />
+              Create Link
+            </CustomButton>
+          {/* </Link> */}
+        </div>
       </motion.div>
 
       <DashboardKPI
@@ -62,11 +86,11 @@ const MyLinks = () => {
         setViewMode={setViewMode}
       />
 
-      {viewMode === "list" ? (
+      {filteredLinks.length !== 0 && (viewMode === "list" ? (
         <MyLinksList filteredLinks={filteredLinks} />
       ) : (
         <BoxQRList filteredLinks={filteredLinks} />
-      )}
+      ))}
       {filteredLinks.length === 0 && (
         <motion.div
           initial={{ opacity: 0 }}

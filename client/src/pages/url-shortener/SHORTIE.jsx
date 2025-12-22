@@ -1,22 +1,24 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/dashboard/Sidebar";
 import CreateLink from "./createlink";
-import { memo, useState } from "react";
+import { memo } from "react";
+import { useSelector } from "react-redux";
 
 const SHORTIE = () => {
-  const [openForm, isOpenForm] = useState(false);
+  // const [openForm, isOpenForm] = useState(false);
+  const isOpen = useSelector((state) => state.ui.addShortLinkForm);
   return (
     <>
       <div
         className={` bg-background flex ${
-          openForm ? "h-screen overflow-hidden" : "min-h-screen"
+          isOpen ? "h-screen overflow-hidden" : "min-h-screen"
         }`}
       >
         <Sidebar />
 
         {/* Overlay */}
 
-        {openForm && (
+        {isOpen && (
           <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center">
             <CreateLink />
           </div>

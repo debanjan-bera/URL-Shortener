@@ -3,16 +3,31 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { login } from "../components/features/auth/authSlice";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const loginData = useSelector((state)=> state.auth.user)
+  const {
+    register,
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      userName:"",
+      password:""
+    },
+  });
   const [showPassword, setShowPassword] = useState(false);
-const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const onsubmit = (data)=>{
+    console.log(data);
+    dispatch(login(data))
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    // run login logic here...
-    navigate("/dashboard");
-  };
+    // navigate("/dashboard");
+  }
+
   return (
     <div className="min-h-screen bg-background flex">
       {/* Left Side - Form */}
@@ -28,7 +43,7 @@ const navigate = useNavigate();
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to home
+            Back to home {loginData?.userName}
           </Link>
 
           <div className="flex items-center gap-2 mb-8">
@@ -45,7 +60,7 @@ const navigate = useNavigate();
             Enter your credentials to access your account
           </p>
 
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form className="space-y-5" onSubmit={handleSubmit(onsubmit)}>
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Email
@@ -55,6 +70,7 @@ const navigate = useNavigate();
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  {...register("userName", { required: true })}
                   //   value={formData.email}
                   //   onChange={(e) =>
                   //     setFormData({ ...formData, email: e.target.value })
@@ -74,6 +90,7 @@ const navigate = useNavigate();
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  {...register("password", { required: true })}
                   //   value={formData.password}
                   //   onChange={(e) =>
                   //     setFormData({ ...formData, password: e.target.value })
@@ -113,11 +130,9 @@ const navigate = useNavigate();
               </a>
             </div>
 
-            <button type="submit"  className="btn-primary w-full">
+            <button type="submit" className="btn-primary w-full">
               Sign In
             </button>
-
-            
           </form>
 
           <p className="text-center text-muted-foreground mt-8">

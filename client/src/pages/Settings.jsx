@@ -16,7 +16,9 @@ import {
   Settings2,
   SettingsIcon,
 } from "lucide-react";
+// import CustomButton from "../components/ui/CustomButton";
 import CustomButton from "../components/ui/CustomButton";
+
 // import CustomInput from "@/components/ui/CustomInput";
 
 const Settings = () => {
@@ -86,7 +88,7 @@ const Settings = () => {
             <ArrowLeft size={20} />
             Back to Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground flex items-center gap-1.5">
            <SettingsIcon/> Settings
           </h1>
           <p className="text-muted-foreground mt-1">

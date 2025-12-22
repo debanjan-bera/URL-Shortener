@@ -56,33 +56,37 @@ const MyLinksList = ({ filteredLinks, isDashboard }) => {
                   } `}
                 >
                   <span className="font-medium text-foreground">
-                    {link.name}
+                    {link?.urlTitle}
                   </span>
                 </td>
                 <td className="px-4 py-3 relative">
                   {/* <div className="flex items-center gap-1 relative"> */}
                   <span className="text-primary font-medium text-sm flex items-center gap-1">
-                    {link.shortUrl}
+                    {link?.shortUrl}
                     <ExternalLink size={12} />
                   </span>
                 </td>
                 <td className="px-4 py-3 hidden md:table-cell">
                   <span className="text-muted-foreground hover:text-foreground  text-sm">
-                    {link.originalUrl.slice(0, 28)}...
+                    {link?.originalUrl.slice(0, 28)}...
                   </span>
                 </td>
                 <td className="px-4 py-3 text-foreground">
-                  {link.clicks.toLocaleString()}
+                  {link?.clicks.toLocaleString()}
                 </td>
-                <td className="px-4 py-3 text-foreground  justify-center hidden md:table-cell">
-                  <img
-                    src={`${link?.qrcode || "logo.png"}`}
+                <td className="px-4 py-3 text-foreground items-center justify-center hidden md:flex">
+                  {
+                  !link?.qrCode ? "-" : 
+                  (<img
+                    src={link?.qrCode}
                     alt=""
                     className="h-10 aspect-square rounded-sm"
-                  />
+                  />)
+                  }
+                  
                 </td>
                 <td className="px-4 py-3 text-muted-foreground hidden lg:table-cell">
-                  {link.created}
+                  {link?.created}
                 </td>
                 <td className="px-4 py-3 relative">
                   <div className="flex items-center gap-1">

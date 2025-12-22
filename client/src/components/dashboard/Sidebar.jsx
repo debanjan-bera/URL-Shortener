@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, LogOut, Menu, X,Link2, QrCode, Settings} from "lucide-react";
+import { Home, LogOut, Menu, X, Link2, QrCode, Settings } from "lucide-react";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -9,16 +10,19 @@ function Sidebar() {
 
   const handleLogout = useCallback(() => {
     navigate("/login");
-  },[navigate]);
+  }, [navigate]);
+  const loginData = useSelector((state) => state.auth.user);
 
-  const navItems = useMemo(()=>[
-    { label: "Dashboard", icon: Home, href: "/dashboard" },
-    { label: "My Link", icon: Link2, href: "/my-link" },
-    { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
-    { label: "Settings", icon: Settings, href: "/settings" },
-  ],[]);
+  const navItems = useMemo(
+    () => [
+      { label: "Dashboard", icon: Home, href: "/dashboard" },
+      { label: "My Link", icon: Link2, href: "/my-link" },
+      { label: "QR Generator", icon: QrCode, href: "/qr-generator" },
+      { label: "Settings", icon: Settings, href: "/settings" },
+    ],
+    []
+  );
 
-  
   return (
     <>
       <button
@@ -47,13 +51,11 @@ function Sidebar() {
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 location.pathname === item.href
                   ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-accent/10 hover:text-foreground"
+                  : "text-muted-foreground hover:bg-accent/70 hover:text-foreground"
               }`}
             >
               <item.icon size={20} />
-              <span>
-        {item.label}
-              </span>
+              <span>{item.label}</span>
             </Link>
           ))}
         </nav>
@@ -62,6 +64,7 @@ function Sidebar() {
             {/* <p className="text-sm font-medium text-foreground truncate">{user?.name}</p>
             <p className="text-xs text-muted-foreground truncate">{user?.email}</p> */}
           </div>
+          <div>{loginData?.userName}</div>
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
@@ -71,6 +74,7 @@ function Sidebar() {
           </button>
         </div>
       </aside>
+
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"

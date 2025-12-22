@@ -1,44 +1,25 @@
 import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { BarChart3, QrCode, Plus, List } from "lucide-react";
-import CustomButton from "../../components/ui/CustomButton";
 import DashboardKPI from "../../components/dashboard/KPI";
 import MyLinksList from "../../components/LinkList";
+// import CustomButton from "../../co";
+import CustomButton from "../../components/ui/CustomButton";
 
+// import actions from '../../store';
+import { addUrl } from "../../components/features/URL/urlReducers";
 const Dashboard = () => {
-  const recentLinks = useMemo(
-    () => [
-      {
-        id: "1",
-        shortUrl: "link.co/abc123",
-        originalUrl: "lovable.dev",
-        clicks: 234,
-        created: "2 hours ago",
-      },
-      {
-        id: "2",
-        shortUrl: "link.co/xyz789",
-        originalUrl: "another-site.com",
-        clicks: 156,
-        created: "5 hours ago",
-      },
-      {
-        id: "3",
-        shortUrl: "link.co/def456",
-        originalUrl: "website.com",
-        clicks: 89,
-        created: "1 day ago",
-      },
-    ],
-    []
-  );
-
+  const recentLinks = useSelector((state)=>state.url.shortUrl)
+  const dispatch = useDispatch(); // perform the redux store define function 
+  // const {addData} = actions;
+  const tasks = useSelector((state) => state.url.shortUrl);
   const totalClicks = useMemo(
     () => recentLinks.reduce((sum, item) => sum + item.clicks, 0),
     [recentLinks]
   );
-
+  console.log(tasks);
   return (
     <>
       <motion.div
@@ -74,6 +55,7 @@ const Dashboard = () => {
         <motion.div className="lg:col-span-2 bg-card border rounded-xl p-6">
           <h2 className="text-lg font-semibold mb-4">Click Analytics</h2>
           <BarChart3 className="text-primary" />
+          
         </motion.div>
 
         <motion.div

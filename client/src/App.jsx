@@ -10,27 +10,32 @@ import QRGenerator from "./pages/url-shortener/QRGenerator";
 import Dashboard from "./pages/url-shortener/Dashboard";
 import MyLinks from "./pages/url-shortener/MyLinks";
 import Settings from "./pages/Settings";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route element={<SHORTIE />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-link" element={<CreateLink />} />
-            <Route path="/my-link" element={<MyLinks />} />
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/settings" element={<Settings />} />
 
-            <Route path="/qr-generator" element={<QRGenerator />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+            <Route element={<SHORTIE />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/create-link" element={<CreateLink />} />
+              <Route path="/my-link" element={<MyLinks />} />
+              <Route path="/qr-generator" element={<QRGenerator />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }

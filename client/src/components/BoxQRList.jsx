@@ -27,13 +27,13 @@ const BoxQRList = React.memo(({ filteredLinks }) => {
             </div>
           </div>
 
-          <h3 className="font-semibold">{link.name}</h3>
-          <p className="text-primary">{link.shortUrl}</p>
+          <h3 className="font-semibold">{link?.urlTitle}</h3>
+          <p className="text-primary">{link?.shortUrl}</p>
 
           <div className="flex justify-between mt-3">
-            <span className="text-xs">{link.clicks} clicks</span>
+            <span className="text-xs">{link?.clicks} clicks</span>
             <a
-              href={`https://${link.shortUrl}`}
+              href={`https://${link?.shortUrl}`}
               target="_blank"
               rel="noreferrer"
             >

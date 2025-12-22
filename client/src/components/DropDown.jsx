@@ -8,16 +8,16 @@ const Dropdown = ({ link, isOpen, onToggle, onClose }) => {
   const [position, setPosition] = useState("bottom");
   const [copiedId, setCopiedId] = useState(null);
 
-const copyToClipboard = useCallback(() => {
-  navigator.clipboard.writeText(`https://${link.shortUrl}`);
+  const copyToClipboard = useCallback(() => {
+    navigator.clipboard.writeText(`https://${link.shortUrl}`);
 
-  setCopiedId(link.id);
+    setCopiedId(link.id);
 
-  setTimeout(() => {
-    setCopiedId(null);
-    onClose();
-  }, 1200);
-}, [link.shortUrl, link.id, onClose]);
+    setTimeout(() => {
+      setCopiedId(null);
+      onClose();
+    }, 1200);
+  }, [link.shortUrl, link.id, onClose]);
 
   // 🔁 Auto flip
   useEffect(() => {
@@ -29,7 +29,9 @@ const copyToClipboard = useCallback(() => {
       const btnRect = btnRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - btnRect.bottom;
 
-      setPosition(spaceBelow < menuRef.current.offsetHeight + 8 ? "top" : "bottom");
+      setPosition(
+        spaceBelow < menuRef.current.offsetHeight + 8 ? "top" : "bottom"
+      );
     };
 
     calculatePosition();
