@@ -1,12 +1,16 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Edit2, Trash2 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { deleteUrl } from "./features/URL/urlReducers";
+import { toggleDrawer } from "./features/UI/uiReducers";
 
 const Dropdown = ({ link, isOpen, onToggle, onClose }) => {
   const btnRef = useRef(null);
   const menuRef = useRef(null);
   const [position, setPosition] = useState("bottom");
   const [copiedId, setCopiedId] = useState(null);
+  const dispatch = useDispatch()
 
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(`https://${link.shortUrl}`);
@@ -18,6 +22,10 @@ const Dropdown = ({ link, isOpen, onToggle, onClose }) => {
       onClose();
     }, 1200);
   }, [link.shortUrl, link.id, onClose]);
+const handleDelete = () => {
+    dispatch(deleteUrl(link.id));
+    onClose();
+  };
 
   // 🔁 Auto flip
   useEffect(() => {
@@ -87,6 +95,11 @@ const Dropdown = ({ link, isOpen, onToggle, onClose }) => {
             <div className="px-4 py-2 text-sm hover:bg-muted/60 flex items-center gap-2 cursor-pointer">
               <Edit2 size={14} /> Edit
             </div>
+            <div className="px-4 py-2 text-sm hover:bg-muted/60 flex items-center gap-2 cursor-pointer"
+            onClick={()=> dispatch(toggleDrawer())}
+            >
+              <Edit2 size={14} /> Info
+            </div>
 
             <button
               onClick={copyToClipboard}
@@ -97,9 +110,11 @@ const Dropdown = ({ link, isOpen, onToggle, onClose }) => {
               <Copy size={14} /> Copy
             </button>
 
-            <div className="px-3 py-2 text-sm flex items-center gap-2 hover:bg-red-500/10 text-red-500 cursor-pointer">
+            <button
+            onClick={handleDelete}
+            className="px-3 py-2 text-sm flex items-center gap-2 hover:bg-red-500/10 text-red-500 cursor-pointer">
               <Trash2 size={14} /> Delete
-            </div>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

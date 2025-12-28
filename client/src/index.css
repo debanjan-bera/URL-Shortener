@@ -2,10 +2,11 @@
    Tailwind base
 -------------------------------- */
 @import "tailwindcss";
-
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 /* -----------------------------
    Tailwind v4 Theme Tokens
 -------------------------------- */
+
 @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -28,11 +29,9 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --color-dark-blue : hsl(var(--dark-blue));
-  --color-success : hsl(var(--success));
-  --color-card : hsl(var(--card));
-
-
+  --color-dark-blue: hsl(var(--dark-blue));
+  --color-success: hsl(var(--success));
+  --color-card: hsl(var(--card));
 
   /* Sidebar colors */
   --color-sidebar-background: hsl(var(--sidebar-background));
@@ -54,7 +53,7 @@
     /* --foreground: 217 19% 27%; */
     --foreground: 220 30% 10%;
 
-     --card: 0 0% 100%;
+    --card: 0 0% 100%;
     --card-foreground: 220 30% 10%;
 
     --popover: 0 0% 100%;
@@ -64,14 +63,14 @@
     --primary-foreground: 0 0% 100%;
 
     /* --secondary: 217 33% 17%; */
-     --secondary: 220 14% 96%;
+    --secondary: 220 14% 96%;
     --secondary-foreground: 0 0% 100%;
 
-        --dark-blue: 220 60% 15%;
---success: 142 76% 36%;
+    --dark-blue: 220 60% 15%;
+    --success: 142 76% 36%;
     /* --muted: 220 13% 95%;
     --muted-foreground: 217 10% 50%; */
- --muted: 220 14% 96%;
+    --muted: 220 14% 96%;
     --muted-foreground: 220 10% 46%;
     --accent: 217 91% 95%;
     --accent-foreground: 217 91% 40%;
@@ -93,52 +92,45 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
-
-
   }
 
   /* -----------------------------
       DARK THEME
   -------------------------------- */
   .dark {
-    --background: 217 19% 27%;
-    --foreground: 0 0% 100%;
+    --background: 222 47% 5%; /* deep navy-black */
+    --foreground: 210 40% 98%;
 
-    --card: 217 19% 27%;
-    --card-foreground: 0 0% 100%;
+    --card: 222 47% 9%; /* card lifted from bg */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 217 19% 27%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Brand */
+    --primary: 217 91% 65%;
+    --primary-foreground: 222 47% 5%;
 
-    /* --secondary: 217 33% 17%; */
-        --secondary: 220 14% 96%;
-    --secondary-foreground: 0 0% 100%;
+    /* UI surfaces */
+    --secondary: 222 47% 14%; /* ❗ fixed */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 217 10% 65%;
+    --muted: 222 47% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 222 47% 18%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 100%;
+    /* Borders & inputs */
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 217 91% 65%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 217 91% 60%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar (match main UI) */
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-accent: 222 47% 14%;
+    --sidebar-border: 222 47% 18%;
   }
 }
 
@@ -202,7 +194,11 @@
 }
 
 @utility text-gradient {
-  background-image: linear-gradient(to right, var(--color-primary), hsl(217 91% 75%));
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary),
+    hsl(217 91% 75%)
+  );
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -211,13 +207,22 @@
    Animations
 -------------------------------- */
 @keyframes marquee {
-  0% { transform: translateX(0) }
-  100% { transform: translateX(-50%) }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-10px) }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @utility animate-marquee {
@@ -229,19 +234,27 @@
 }
 
 @keyframes accordion-down {
-  from { height: 0 }
-  to { height: var(--radix-accordion-content-height) }
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
 }
 
 @keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height) }
-  to { height: 0 }
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 @utility animate-accordion-down {
-  animation: accordion-down .2s ease-out;
+  animation: accordion-down 0.2s ease-out;
 }
 
 @utility animate-accordion-up {
-  animation: accordion-up .2s ease-out;
+  animation: accordion-up 0.2s ease-out;
 }

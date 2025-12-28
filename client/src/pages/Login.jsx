@@ -20,12 +20,13 @@ export const Login = () => {
     },
   });
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate();
+
+  const navigate = useNavigate();
+  
   const onsubmit = (data)=>{
-    console.log(data);
     dispatch(login(data))
 
-    // navigate("/dashboard");
+    navigate("/dashboard");
   }
 
   return (

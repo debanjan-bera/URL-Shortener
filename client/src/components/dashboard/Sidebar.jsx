@@ -1,10 +1,13 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Home, LogOut, Menu, X, Link2, QrCode, Settings } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSidebar } from "../features/UI/uiReducers";
 
 function Sidebar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const dispatch = useDispatch()
+  const isSidebarOpen = useSelector((state) => state.ui.sidebarOpen)
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,17 +28,12 @@ function Sidebar() {
 
   return (
     <>
-      <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden  absolute top-4 right-4 z-30 p-2 bg-card border border-border rounded-lg"
-      >
-        {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+     
 
       {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-40 transform transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
         <div className="p-6 flex items-center gap-1.5">
@@ -61,8 +59,7 @@ function Sidebar() {
         </nav>
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
           <div className="mb-3 px-4">
-            {/* <p className="text-sm font-medium text-foreground truncate">{user?.name}</p>
-            <p className="text-xs text-muted-foreground truncate">{user?.email}</p> */}
+
           </div>
           <div>{loginData?.userName}</div>
           <button
@@ -75,10 +72,10 @@ function Sidebar() {
         </div>
       </aside>
 
-      {sidebarOpen && (
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
+          onClick={() => dispatch(toggleSidebar())}
         />
       )}
     </>

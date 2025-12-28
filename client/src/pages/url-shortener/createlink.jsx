@@ -34,6 +34,7 @@ const CreateLink = () => {
       shortUrl: "",
       qrCode: "",
       clicks: "",
+      created: ""
     },
   });
 
@@ -70,6 +71,7 @@ const CreateLink = () => {
       shortUrl,
       qrCode,
       clicks: 12,
+      created: new Date().toISOString().split("T")[0],
     };
     dispatch(addUrl(payload));
     console.log("SEND TO BACKEND:", payload);

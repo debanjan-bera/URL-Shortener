@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { memo, useMemo, useState } from "react";
+
 import { Download, Palette, Image, Link2, RefreshCw } from "lucide-react";
 import CustomButton from "../../components/ui/CustomButton";
 
@@ -9,19 +8,25 @@ const QRGenerator = () => {
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
   const [size, setSize] = useState(200);
-  // const [style, setStyle] = useState("square");
-  // const canvasRef = useRef(null);
 
-  const colorPresets = [
-    { fg: "#000000", bg: "#ffffff", name: "Classic" },
-    { fg: "#1a1a2e", bg: "#eaeaea", name: "Dark" },
-    { fg: "#e94560", bg: "#0f3460", name: "Neon" },
-    { fg: "#2d6a4f", bg: "#d8f3dc", name: "Nature" },
-    { fg: "#7c3aed", bg: "#ede9fe", name: "Purple" },
-    { fg: "#ea580c", bg: "#fff7ed", name: "Orange" },
-  ];
+  const colorPresets = useMemo(
+    () => [
+      { fg: "#000000", bg: "#ffffff", name: "Classic" },
+      { fg: "#1a1a2e", bg: "#eaeaea", name: "Dark" },
+      { fg: "#e94560", bg: "#0f3460", name: "Neon" },
+      { fg: "#2d6a4f", bg: "#d8f3dc", name: "Nature" },
+      { fg: "#7c3aed", bg: "#ede9fe", name: "Purple" },
+      { fg: "#ea580c", bg: "#fff7ed", name: "Orange" },
+    ],
+    []
+  );
 
-  const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(url)}&dark=${fgColor.replace("#", "")}&light=${bgColor.replace("#","")}&size=${size}`;
+  const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(
+    url
+  )}&dark=${fgColor.replace("#", "")}&light=${bgColor.replace(
+    "#",
+    ""
+  )}&size=${size}`;
 
   const downloadQR = async (format = "png") => {
     if (!url && !qrUrl) return;
@@ -188,7 +193,12 @@ const QRGenerator = () => {
             style={{ backgroundColor: bgColor }}
           >
             {url ? (
-              <img src={qrUrl} alt="" />
+              <img
+                src={qrUrl}
+                alt="QR Code Preview"
+                loading="lazy"
+                className="max-w-full h-auto"
+              />
             ) : (
               // <canvas ref={canvasRef} className="max-w-full h-auto" />
 
@@ -219,4 +229,4 @@ const QRGenerator = () => {
   );
 };
 
-export default QRGenerator;
+export default memo(QRGenerator);

@@ -23,7 +23,7 @@ export const NavaBar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
-            {["Home", "Product", "Pricing", "Resource"].map((item) => (
+            {["Home", "Product", "Pricing", "Dashboard"].map((item) => (
               <Link
                 key={item}
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -70,7 +70,7 @@ export const NavaBar = () => {
               className="md:hidden overflow-hidden"
             >
               <div className="pt-4 pb-6 space-y-3">
-                {["Home", "Product", "Pricing", "Resource"].map((item, i) => (
+                {["Home", "Product", "Pricing", "Dashboard"].map((item, i) => (
                   <motion.div
                     key={item}
                     initial={{ opacity: 0, x: -20 }}

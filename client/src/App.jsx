@@ -16,6 +16,7 @@ import { store } from "./store";
 function App() {
   return (
     <>
+    {/* <section className="dark"> */}
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
@@ -36,6 +37,8 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Provider>
+
+    {/* </section> */}
     </>
   );
 }

@@ -25,17 +25,18 @@ const authSlice = createSlice({
 
     restoreAuth: (state) => {
       try {
-    const savedUser = localStorage.getItem("authUser");
-    if (!savedUser) return;
+        const savedUser = localStorage.getItem("authUser");
+        if (!savedUser) return;
 
-    state.user = JSON.parse(savedUser);
-    state.isAuthenticated = true;
-  } catch (error) {
-    localStorage.removeItem("authUser");
-  }
+        state.user = JSON.parse(savedUser);
+        state.isAuthenticated = true;
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem("authUser");
+      }
+    },
   },
-}
-})
+});
 
 export const { login, logout, restoreAuth } = authSlice.actions;
 export default authSlice.reducer;

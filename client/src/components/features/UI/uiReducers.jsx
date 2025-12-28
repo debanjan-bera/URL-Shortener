@@ -1,31 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  theme: "light",
   addShortLinkForm: false,      
-  sidebarOpen: true,     
+  sidebarOpen: false,
+  drawerOpen: false,
 };
 
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    toggleTheme(state) {
-      state.theme = state.theme === "light" ? "dark" : "light";
-    },
     toggleSidebar(state) {
       state.sidebarOpen = !state.sidebarOpen;
     },
     toggleAddTaskForm(state){
         state.addShortLinkForm = !state.addShortLinkForm;
-    }
+    },
+    toggleDrawer(state) {
+      state.drawerOpen = !state.drawerOpen;
+    },
   },
 });
 
 export const {
-  toggleTheme,
   toggleSidebar,
-  toggleAddTaskForm
+  toggleAddTaskForm,
+  toggleDrawer
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

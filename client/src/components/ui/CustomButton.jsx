@@ -17,7 +17,9 @@ const CustomButton = ({
     default: "bg-primary text-primary-foreground hover:bg-primary/90",
     outline: "border border-border bg-transparent hover:bg-accent/10 text-foreground",
     ghost: "border hover:bg-accent/10 text-foreground",
-    green:"bg-green-500/70 text-green-950 hover:bg-green-500/80"
+    green:"bg-green-100 text-green-700 hover:bg-green-200/80",
+    blue:"bg-blue-100 text-blue-700 hover:bg-blue-200/80",
+    orange: "bg-orange-100 text-orange-600  hover:bg-orange-200/80"
   };
 
   const sizes = {

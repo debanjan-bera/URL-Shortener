@@ -5,27 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarChart3, QrCode, Plus, List } from "lucide-react";
 import DashboardKPI from "../../components/dashboard/KPI";
 import MyLinksList from "../../components/LinkList";
-// import CustomButton from "../../co";
 import CustomButton from "../../components/ui/CustomButton";
+import { toggleAddTaskForm} from "../../components/features/UI/uiReducers";
 
-// import actions from '../../store';
-import { addUrl } from "../../components/features/URL/urlReducers";
 const Dashboard = () => {
   const recentLinks = useSelector((state)=>state.url.shortUrl)
-  const dispatch = useDispatch(); // perform the redux store define function 
-  // const {addData} = actions;
-  const tasks = useSelector((state) => state.url.shortUrl);
-  const totalClicks = useMemo(
-    () => recentLinks.reduce((sum, item) => sum + item.clicks, 0),
-    [recentLinks]
-  );
-  console.log(tasks);
+  const toggleCreateForm = useDispatch()
+  const totalClicks = useMemo(() => recentLinks.reduce((sum, item) => sum + item.clicks, 0),[recentLinks]);
   return (
     <>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className=" mb-8"
       >
         <h1 className="text-2xl sm:text-3xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground">
@@ -55,7 +47,6 @@ const Dashboard = () => {
         <motion.div className="lg:col-span-2 bg-card border rounded-xl p-6">
           <h2 className="text-lg font-semibold mb-4">Click Analytics</h2>
           <BarChart3 className="text-primary" />
-          
         </motion.div>
 
         <motion.div
@@ -66,11 +57,12 @@ const Dashboard = () => {
         >
           <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
           <div className=" flex flex-col items-stretch gap-3">
-            <Link to="/create-link" className="w-full">
-              <CustomButton className="gap-3 w-full justify-start ">
+              <CustomButton className="gap-3 w-full justify-start "
+              variant="blue"
+              onClick={()=> toggleCreateForm(toggleAddTaskForm())}
+              >
                 <Plus size={18} /> Create Short Link
               </CustomButton>
-            </Link>
             <Link to="/qr-generator">
               <CustomButton
                 variant="green"
@@ -81,7 +73,7 @@ const Dashboard = () => {
             </Link>
             <Link to="/manage-qr">
               <CustomButton
-                variant="outline"
+                variant="orange"
                 className=" w-full justify-start gap-3"
               >
                 <List size={18} /> Manage QR
