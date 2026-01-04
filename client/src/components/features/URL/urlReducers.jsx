@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   shortUrl: JSON.parse(localStorage.getItem("shortlink")) || [],
-  qrCode: JSON.parse(localStorage.getItem("qrCode")) || [],
 };
 
 const urlSlice = createSlice({

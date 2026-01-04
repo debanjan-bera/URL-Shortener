@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from "react";
-
+import { motion } from "framer-motion";
 import { Download, Palette, Image, Link2, RefreshCw } from "lucide-react";
 import CustomButton from "../../components/ui/CustomButton";
 

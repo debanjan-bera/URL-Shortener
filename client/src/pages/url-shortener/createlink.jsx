@@ -64,7 +64,7 @@ const CreateLink = () => {
     setValue("qrCode", qrCode);
 
     // ✅ FINAL PAYLOAD (THIS is what you send)
-    const payload = {
+    const linkPayload = {
       id: generateAlias(7),
       urlTitle: data.urlTitle,
       originalUrl: data.originalUrl,
@@ -73,8 +73,8 @@ const CreateLink = () => {
       clicks: 12,
       created: new Date().toISOString().split("T")[0],
     };
-    dispatch(addUrl(payload));
-    console.log("SEND TO BACKEND:", payload);
+    dispatch(addUrl(linkPayload));
+    console.log("SEND TO BACKEND:", linkPayload);
     // resetForm(false);
   };
 

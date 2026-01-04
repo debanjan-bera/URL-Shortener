@@ -30,7 +30,3 @@ export const store = configureStore({
   },
 });
 
-// console.log(store.dispatch(addData("Hello world")));
-
-// const actions = taskReducer.actions;
-// export default actions;
